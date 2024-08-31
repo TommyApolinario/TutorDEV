@@ -1,0 +1,28 @@
+<body data-aos="fade-left">
+     <!--Orden-->
+     <div class="row mt-4 mb-4">
+        <h4><b>Reordena las palabras</b></h4>
+    </div>
+
+    <!--Pregunta-->
+    <div class="row d-flex mb-4">
+        <div class="col-12 col-md-3 col-lg-3 order d-flex align-items-center justify-content-center">
+            <img src="../../../../../assets/order-word-activity.svg"
+                alt="img-activity">
+        </div>
+        <div class="col-12 col-md-9 col-lg-9 d-flex align-items-center justify-content-center">
+            <p>{{activity.question.text_root}}</p>
+        </div>
+    </div>
+
+    <!--Drag and drop-->
+    <div class="row d-flex mb-4">
+        <div class="col d-flex align-items-center">
+            <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
+                @for (timePeriod of arrayWords; track timePeriod) {
+                  <div class="example-box" cdkDrag>{{timePeriod}}</div>
+                }
+              </div>
+        </div>
+    </div>
+</body>

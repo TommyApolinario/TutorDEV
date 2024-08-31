@@ -1,0 +1,60 @@
+body{
+    border-radius: 10px;
+    padding: 0 15px;
+}
+
+.icon-title {
+    color: var(--primary-color);
+}
+
+.div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-secondary {
+    border-radius: 50px;
+}
+
+.input-group-text {
+    margin-right: 10px !important;
+    border-radius: 10px !important;
+}
+
+.option {
+    border-radius: 10px !important;
+}
+
+.option-correct>.input-group-text {
+    border-color: var(--primary-color) !important;
+    background-color: var(--secondary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+.option-correct>.form-control {
+    border-color: var(--primary-color) !important;
+    background-color: var(--secondary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+/*For small screens*/
+@media screen and (max-width: 760px) {
+    #title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .div {
+        display: block;
+    }
+
+    .div .btn-secondary {
+        width: 100%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .action-buttons>button {
+        width: 100%;
+    }
+}

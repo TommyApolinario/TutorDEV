@@ -1,0 +1,28 @@
+<body data-aos="fade-left">
+    <!--Orden-->
+    <div class="row mt-4 mb-4">
+        <h4><b>Completa el siguiente párrafo</b></h4>
+    </div>
+
+    <!--Orden-->
+    <div class="row d-flex mb-4">
+        <div class="col d-flex align-items-center">
+            <p>Lee atentamente el párrafo y escribe la palabra que hace falta al final de este. Ayúdate con la pista...</p>
+        </div>
+    </div>
+
+    <!--Párrafo-->
+    <div class="row d-flex mb-4">
+        <form [formGroup]="completeWordForm" class="col d-flex align-items-center">
+            <p>{{activity.question.text_root}} <input type="text" class="fs-6" formControlName="wordToComplete"> ".</p>
+        </form>
+    </div>
+
+    <br />
+    <!--Pista-->
+    <div class="row d-flex mb-4">
+        <div class="col d-flex align-items-center">
+            <p><b class="help">Pista: </b>{{activity.question.options.hind}}</p>
+        </div>
+    </div>
+</body>

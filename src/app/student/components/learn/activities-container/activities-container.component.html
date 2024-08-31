@@ -1,0 +1,110 @@
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
+
+<div class="row justify-content-center container-general">
+    <div class="col-11 col-md-8 col-lg-8 container-theory mt-3 justify-content-center">
+        <!--Header-->
+        <div class="row align-items-center progress-activity">
+            <div class="col-auto leave">
+                <fa-icon [icon]="iconLeave" (click)="leavePractice()"></fa-icon>
+            </div>
+
+            <div class="col content-progress">
+                <div class="progress rounded-5">
+                    <div class="progress-bar" role="progressbar" [style.width.%]="(nextActivity / totalProgressBar) * 100"
+                        [attr.aria-valuemin]="0" [attr.aria-valuemax]="totalProgressBar"></div>
+                </div>
+            </div>
+
+            <div class="col-auto quantity-questions">
+                <p><b>{{nextActivity}} / {{arrayActivities.length}}</b></p>
+            </div>
+        </div>
+
+        <!--Body-->
+        <div class="row container-activity justify-content-center align-items-center">
+            <div class="col-xs-12 col-sm-12 col-md-11 col-lg-9 col-xl-8">
+                @if(nextActivity < totalProgressBar){
+                    @for(activity of arrayActivities; track $index){
+                        @if((nextActivity + 1) == ($index + 1)){
+                            @if(activity.question.type_question == "multi_choice_text" && activity.question.options.select_mode ==
+                            "multiple"){
+                            <app-select-several-correct [activity]="activity" (multiAnswers)="getMultiOptionsSelected($event)"
+                                (answerUserId)="getAnswerUserId($event)"></app-select-several-correct>
+                            }
+                            @if(activity.question.type_question == "multi_choice_text" && activity.question.options.select_mode ==
+                            "single"){
+                            <app-select-with-sentence [activity]="activity" (singleAnswer)="getSingleOptionSelected($event)"
+                                (answerUserId)="getAnswerUserId($event)"></app-select-with-sentence>
+                            }
+                            @if(activity.question.type_question == "order_word"){
+                            <app-order-words [activity]="activity" (orderedWords)="getWordsInOrder($event)"
+                                (answerUserId)="getAnswerUserId($event)"></app-order-words>
+                            }
+                            @if(activity.question.type_question == "true_or_false"){
+                            <app-true-or-false [activity]="activity" (trueOrFalseAnswer)="getTrueOrFalse($event)"
+                                (answerUserId)="getAnswerUserId($event)"></app-true-or-false>
+                            }
+                            @if(activity.question.type_question == "complete_word"){
+                            <app-complete-paragraph [activity]="activity" (textToComplete)="getTextToComplete($event)"
+                                (answerUserId)="getAnswerUserId($event)"></app-complete-paragraph>
+                            }
+                        }
+                    }
+                }
+                @else if(nextActivity != 0) {
+                    <app-finish-activity [lessonID]="lessonID"></app-finish-activity>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Footer-->
+@if(nextActivity < totalProgressBar){
+    <div class="row fixed-bottom">
+        <div class="row footer d-flex justify-content-center align-items-center"
+            [ngStyle]="{'background-color': statusAnswer == 1 ? '#E2E0F9' : statusAnswer == 2 ? '#FFCAC8' : '#FFF'}">
+            <div class="col-10 col-md-8 col-lg-8">
+                <div class="container-buttons d-flex justify-content-between">
+    
+                    @if(nameButton === "Comprobar" ){
+                    <button class="btn btn-outline-info btn-lg" (click)="leavePractice()"
+                        [ngStyle]="{'background-color': statusAnswer == 1 ? '#E2E0F9' : statusAnswer == 2 ? '#FFCAC8' : '#FFF',
+                                    'border-color': statusAnswer == 1 ? '#5952A2' : statusAnswer == 2 ? '#FC3B56' : '#5952A2'}">
+                        Abandonar</button>
+                    }
+                    @else {
+                    <div class="row feedback">
+                        <div class="col-3 align-content-center">
+                            <p class="text-center fs-1"><fa-icon [icon]="iconCheck"
+                                    [ngStyle]="{'color': statusAnswer == 1 ? '#5952A2' : statusAnswer == 2 ? '#FC3B56' : '#5952A2'}">
+                                </fa-icon></p>
+                        </div>
+                        <div class="col-9">
+                            <div class="row mt-1"
+                                [ngStyle]="{'color': statusAnswer == 1 ? '#5952A2' : statusAnswer == 2 ? '#FC3B56' : '#5952A2'}">
+                                <p><b>¡{{statusAnswer==1 ? 'Respuesta correcta': 'Respuesta incorrecta'}}!</b></p>
+                                <p>{{feedback}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    <button class="btn btn-info btn-lg" [disabled]="isSelectedOption!=''? false : true || loadingButton? true : false"
+                        (click)="checkAnswer()"
+                        [ngStyle]="{'background-color': statusAnswer == 1 ? '#5952A2' : statusAnswer == 2 ? '#FC3B56' : '#5952A2',
+                                    'border-color': statusAnswer == 1 ? '#5952A2' : statusAnswer == 2 ? '#FC3B56' : '#5952A2'}">
+                        @if(loadingButton){
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span> Comprobar</span>
+                        }
+                        @if(!loadingButton){
+                            <span>{{ nameButton }}</span>
+                        }
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

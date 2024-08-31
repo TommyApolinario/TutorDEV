@@ -1,0 +1,9 @@
+body{
+    height: 85vh;
+    border-radius: 10px;
+    overflow-y: hidden;
+}
+
+h1,h5{
+    color: #d8d8d8 !important;
+}

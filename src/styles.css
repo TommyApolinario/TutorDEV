@@ -1,0 +1,129 @@
+:root {
+    --primary-color: #648C5E;
+    --secondary-color: #ffffff;
+    --white: #f1f1f1;
+    --black: #3f3f3f;
+    --text-color: #888888;
+    --alert-color: #FC3B56;
+}
+
+
+/* -------- Styles for buttons -------- */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    color: var(--white) !important;
+    border-color: var(--primary-color) !important;
+    padding: 5px 20px !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+}
+
+.btn-outline-primary {
+    background-color: var(--white) !important;
+    color: var(--primary-color) !important;
+    border-color:var(--primary-color)!important;
+    padding: 5px 20px !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+}
+
+
+/* -------- Styles for links -------- */
+.link{
+    color: var(--primary-color) !important;
+    cursor: pointer !important;
+}
+
+
+
+/* -------- Styles for inputs -------- */
+.form-control-lg {
+    border-radius: 10px;
+    padding: 4px 10px !important;
+}
+
+.form-select{
+    padding: 7px !important;
+}
+
+
+/* -------- Styles for title modules -------- */
+.title-module>h4{
+    font-weight: 700;
+    color: var(--black) !important;
+}
+
+.title-module>h4>fa-icon{
+    color: var(--primary-color) !important;
+}
+
+.validators {
+    color: var(--alert-color) !important;
+}
+
+
+/* -------- Styles for design of tables -------- */
+table td,
+table th {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+thead th {
+    background-color: var(--secondary-color) !important;
+    color: #474747;
+}
+
+.card {
+    border-radius: .2rem;
+}
+
+.table-scroll {
+    border-radius: .2rem;
+}
+
+.table-scroll table thead th {
+    font-size: .9rem;
+}
+
+th,
+td {
+    font-size: .8rem;
+}
+
+thead {
+    top: 0;
+    position: sticky;
+}
+
+.no-results {
+    text-align: center;
+    background-color: #fafafa;
+}
+
+
+/* -------- Styles for design of paginator -------- */
+.custom-page-link {
+    color: #52a271 !important;
+}
+
+.custom-page-link:hover {
+    background-color: #52a25d !important;
+    border-color: #52a25f !important;
+    color: #fff !important;
+}
+
+.page-link:hover {
+    background-color: #52a259 !important;
+    border-color: #52a25d !important;
+    color: #fff !important;
+}
+
+.page-item.active .custom-page-link {
+    background-color: #52a276 !important;
+    border-color: #52a256 !important;
+    color: #fff !important;
+}

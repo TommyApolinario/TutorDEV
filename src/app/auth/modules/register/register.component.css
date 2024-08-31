@@ -1,0 +1,14 @@
+.container .box{
+    width: 500px !important;
+    height: auto !important;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 60px !important;
+    margin-top: 60px !important;
+    margin-bottom: 60px !important;
+}

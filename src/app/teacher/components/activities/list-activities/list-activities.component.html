@@ -1,0 +1,139 @@
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
+
+<body>
+    <div class="row justify-content-center">
+        <div class="col-12 container-info">
+            <div class="div mt-3 mx-1">
+                <h4 id="titulo"><fa-icon [icon]="iconActivities" class="icon-title"></fa-icon> Actividades</h4>
+                <button type="button" class="btn btn-primary btn-sm" (click)="goToAddActivity()">
+                    <fa-icon [icon]="iconAdd" class="icon-button"></fa-icon> Nueva actividad</button>
+            </div>
+            <br />
+
+            <div class="row">
+                <!--Para filtrar las actividades por módulo-->
+                <div class="col-12 col-md-3 col-lg-3">
+                    <form>
+                        <input type="text" placeholder="Filtrar por..." [matAutocomplete]="auto"
+                            class="form-control form-control-lg bg-light fs-6" (focus)="onFocus()"
+                            (input)="onSearchModule($event)" name="searchModule"/>
+
+                        <mat-autocomplete #auto="matAutocomplete">
+                            @for(module of filteredModulesTitle; track $index){
+                                <mat-option
+                                    [value]="module.title"
+                                    (click)="getActivitiesByModule(module.id, currentPage, itemsForPage)">
+                                    {{ module.title }}
+                                </mat-option>
+                            }
+                            @if(filteredModulesTitle.length === 0){
+                                <mat-option [value]="'Sin resultados'">
+                                    Sin resultados...
+                                </mat-option>
+                            }
+                        </mat-autocomplete>
+
+                    </form>
+                </div>
+                <!--Buscar actividad por tipo de actividad (type_question)-->
+                <div class="col-12 col-md-4 col-lg-4 mb-3">
+                    <form>
+                        <input class="form-control me-1" type="text" placeholder="Buscar por enunciado..." name="searchActivity"
+                            [(ngModel)]="activitiesToSearch">
+                    </form>
+                </div>
+                <!--Importar los datos de la tabla a Excel-->
+                <div class="col-12 col-md-5 col-lg-5 export-buttons mb-3">
+                    <button type="button" class="btn save-xlsx" data-bs-toggle="mensaje"
+                        title="Exportar a XLSX" (click)="downloadXLSX()">
+                        <fa-icon [icon]="iconXlsx"></fa-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!--Tabla con el listado de módulos-->
+            <div class="card">
+                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true"
+                    style="position: relative;">
+                    <table class="table table-striped mb-0" id="htmlExcelTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">N°</th>
+                                <th scope="col">Tipo de actividad</th>
+                                <th scope="col">Enunciado</th>
+                                <th scope="col">Creada por</th>
+                                <th scope="col">Dificultad</th>
+                                <th scope="col">Fecha de creación</th>
+                                <th scope="col">Fecha de actualización</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(arrayActivities.length > 0) {
+                                @for(activity of arrayActivities | searchRegisters:activitiesToSearch:searchBy; track $index){
+                                    <tr>
+                                        <th scope="row">{{$index+1}}</th>
+                                        @switch (activity.type_question) {
+                                            @case("multi_choice_text"){
+                                                <td>Seleccionar</td>
+                                            }
+                                            @case("order_word"){
+                                                <td>Ordenar</td>
+                                            }
+                                            @case("true_or_false"){
+                                                <td>Verdadero o falso</td>
+                                            }
+                                            @case("complete_word"){
+                                                <td>Completar</td>
+                                            }
+                                        }
+                                        <td data-bs-toggle="mensaje" title="{{activity.text_root}}">{{activity.text_root}}</td>
+                                        <td>{{activity.created_by}}</td>
+                                        <td>{{activity.difficulty}}</td>
+                                        <td>{{activity.created_at}}</td>
+                                        <td>{{activity.updated_at}}</td>
+                                        <td class="actions">
+                                            <fa-icon data-bs-toggle="mensaje" title="Editar" id="iconEdit"
+                                                [icon]="iconEdit" (click)="goToEditActivity(activity.id)"></fa-icon>
+                                            <fa-icon data-bs-toggle="mensaje" title="Eliminar" id="iconDelete"
+                                                [icon]="iconDelete" (click)="deleteQuestion(activity.id)"></fa-icon>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            @else{
+                                <tr>
+                                    <td colspan="8" class="no-results">Sin resultados...</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--Paginación-->
+            <br />
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled" [class.disabled]="currentPage === 1">
+                        <a class="page-link custom-page-link"
+                            (click)="currentPage > 1 ? pageChanged(currentPage - 1) : null" tabindex="-1"><fa-icon
+                                [icon]="iconBack"></fa-icon></a>
+                    </li>
+                    @for(page of arrayPaginator; track $index){
+                        <li class="page-item" [class.active]="currentPage === $index + 1">
+                            <a class="page-link custom-page-link" (click)="pageChanged($index+1)">{{ $index+1 }}</a>
+                        </li>
+                    }
+                    <li class="page-item" [class.disabled]="currentPage === arrayPaginator.length">
+                        <a class="page-link custom-page-link"
+                            (click)="currentPage < arrayPaginator.length ? pageChanged(currentPage +1) : null"><fa-icon
+                                [icon]="iconNext"></fa-icon></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</body>

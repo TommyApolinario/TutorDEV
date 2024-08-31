@@ -1,0 +1,15 @@
+#iconDelete {
+    font-size: 1rem !important;
+    margin-right: 12px;
+    cursor: pointer;
+    color: var(--alert-color);
+}
+
+#htmlExcelTable td:nth-child(3),
+#htmlExcelTable th:nth-child(3) {
+  max-width: 200px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  position: relative !important;
+}

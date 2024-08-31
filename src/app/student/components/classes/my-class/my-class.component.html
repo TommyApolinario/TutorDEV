@@ -1,0 +1,63 @@
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
+
+<body>
+    <div class="row d-flex">
+        <div class="d-flex flex-wrap mb-2 justify-content-between">
+            <div class="col-12 col-md-3 mt-3 title-module">
+                <h4 id="titulo"><fa-icon [icon]="iconMyClass" class="icon-title"></fa-icon> Mis clases</h4>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-sm col-12 col-md-2 mt-3"
+                (click)="openModalJoinToClass(joinToClass)">
+                <fa-icon [icon]="iconAdd"></fa-icon> Nueva clase</button>
+        </div>
+
+
+        @for(class of arrayClasses; track $index){
+            <div class="card-col col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-3 mb-3">
+                <div class="card">
+                    <img src="../../../../../assets/bg-module.svg" class="card-img-top" alt="background-module"
+                        (click)="goToEvaluations()">
+                    <div class="card-body">
+                        <div class="title-module">
+                            <h6 class="mb-1"><b> {{class.name}}</b></h6>
+                            <p class="info-body-card mb-0"><fa-icon [icon]="iconProfessor" class="icon-module"></fa-icon>&nbsp;&nbsp;{{class.teacher.first_name + class.teacher.last_name}} - {{class.paralelo}}</p>
+                            <p class="info-body-card mb-0"><fa-icon [icon]="iconCourse" class="icon-module"></fa-icon>&nbsp;&nbsp;{{class.course}} - {{class.paralelo}}</p>
+                            <p class="info-body-card"><fa-icon [icon]="iconCalendar" class="icon-module"></fa-icon>&nbsp;&nbsp;Período {{class.academic_period}}</p>
+                        </div>
+
+                        <div class="row d-flex justify-content-between mx-0 mt-2">
+                            <div class="col-3 students text-center" (click)="openModalViewStudents(viewStudents, class.id)">
+                                <fa-icon [icon]="iconStudents" class="fs-6"></fa-icon>
+                            </div>
+                            <div class="col-3 view-details text-center" (click)="openModalViewClassDetail(viewClassDetail, class)">
+                                <fa-icon [icon]="iconViewDetails" class="fs-6"></fa-icon>
+                            </div>
+                            <div class="col-3 leave-class text-center" (click)="showAlertLeaveClass(class.id)">
+                                <fa-icon [icon]="iconLeaveClass" class="fs-6"></fa-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+
+
+<!--Modal para suscribirse a un módulo-->
+<ng-template #joinToClass>
+    <app-join-to-class></app-join-to-class>
+</ng-template>
+
+<!--Modal para ver los estudiantes de una clase-->
+<ng-template #viewStudents>
+    <app-view-students></app-view-students>
+</ng-template>
+
+<!--Modal para ver detalles de una clase-->
+<ng-template #viewClassDetail>
+    <app-view-class-detail></app-view-class-detail>
+</ng-template>

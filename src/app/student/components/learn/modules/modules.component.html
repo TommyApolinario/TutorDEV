@@ -1,0 +1,85 @@
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
+
+<body>
+    <div class="row d-flex">
+        <div class="title-module mt-3 mx-1">
+            <h4 id="titulo"><fa-icon [icon]="iconModules" class="icon-title"></fa-icon> Módulos</h4>
+        </div>
+
+        <div class="d-flex flex-wrap mb-2 justify-content-between">
+            <form class="col-12 col-md-3 mt-3">
+                <select class="form-select" aria-label="Default select example" (change)="onFilterChange($event)">
+                    <option value="all" selected>Todos los módulos</option>
+                    <option value="subscribed">Módulos suscritos</option>
+                </select>
+            </form>
+            <button type="button" class="btn btn-primary btn-sm col-12 col-md-2 mt-3" (click)="openModalSubscribeToModule(subscribeToModule)">
+                <fa-icon [icon]="iconAdd"></fa-icon> Suscribirme</button>
+        </div>
+
+        @for(module of arrayModules.data; track module.id){
+        <div class="card-col col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-3 mb-3">
+            <div class="card-customer"(click)="showAlertPracticeOrSubscribe(module, statusFilter, module.id)">
+                <!--[src]="module.img_back_url ? module.img_back_url : '../../../../../assets/bg-module.svg'"-->
+                <!-- <img src="../../../../../assets/bg-module.svg" class="card-img-top" alt="background-module"
+                (click)="showAlertPracticeOrSubscribe(module, statusFilter, module.id)"> -->
+                <div class="card-body-customer">
+                    <div class="title-module d-flex flex-wrap justify-content-between">
+                        <p class="mb-1"> {{module.title}}</p>
+                        <fa-icon [icon]="iconViewDetails" class="icon-module" (click)="openModalViewDetailComponent(viewModuleDetail, module.id)"></fa-icon>
+                    </div>
+                    @if(statusFilter === "all"){
+                        <span class="text-body-card" [style.background-color]="module.is_subscribed ? '#198754' : '#5952A2'"
+                            [style.border-radius]="module.is_subscribed ? '5px' : '5px'"
+                            [style.padding]="module.is_subscribed ? '4px' : '4px'"
+                            [style.color]="module.is_subscribed ? 'white' : 'white'">
+                            {{module.is_subscribed ? 'Suscrito' : 'Disponible'}}
+                        </span>
+                    }
+                    @if(statusFilter === "subscribed"){
+                    <span class="text-body-card" [style.background-color]="'#FCE464'" [style.border-radius]="'5px'"
+                        [style.padding]="'4px'" [style.color]="'#303030'">
+                        En progreso
+                    </span>
+                    }
+                    <p class="text-body-card mt-3">{{module.short_description}}</p>
+                </div>
+            </div>
+        </div>
+        }
+       
+        <!--Paginación-->
+        @if(totalPage != 0){
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled" [class.disabled]="currentPage === 1">
+                        <a class="page-link custom-page-link" (click)="currentPage > 1 ? pageChanged(currentPage - 1) : null" tabindex="-1"
+                            > <fa-icon [icon]="iconBack"></fa-icon> Anterior</a>
+                    </li>
+                    @for(page of arrayPaginator; track $index){
+                    <li class="page-item" [class.active]="currentPage === $index + 1">
+                        <a class="page-link custom-page-link" (click)="pageChanged($index+1)">{{ $index+1 }}</a>
+                    </li>
+                    }
+                    <li class="page-item" [class.disabled]="currentPage === arrayPaginator.length">
+                        <a class="page-link custom-page-link"
+                            (click)="currentPage < arrayPaginator.length ? pageChanged(currentPage +1) : null">Siguiente 
+                            <fa-icon [icon]="iconNext"></fa-icon></a>
+                    </li>
+                </ul>
+            </nav>
+        }
+    </div>
+</body>
+
+<!--Modal para suscribirse a un módulo-->
+<ng-template #subscribeToModule>
+   <app-subscribe-to-module></app-subscribe-to-module>
+</ng-template>
+
+<!--Modal para ver información de un módulo-->
+<ng-template #viewModuleDetail>
+    <app-view-module-detail></app-view-module-detail>
+ </ng-template>

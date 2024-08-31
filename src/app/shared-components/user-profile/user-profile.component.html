@@ -1,0 +1,165 @@
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
+
+<body>
+    <div class="row justify-content-center">
+        <div class="col-12 container-info">
+            <div class="div mt-3 mx-1">
+                <h4 id="titulo"><fa-icon [icon]="iconMyProfile" class="icon-first_name"></fa-icon> Mi perfil</h4>
+            </div>
+
+            <div class="row mt-3">
+                <!--Card con información del Nombre y departamento-->
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img [src]="infoUser.url_avatar?infoUser.url_avatar:'../../../assets/user-profile.png'" alt="avatar"
+                                class="rounded-circle img-fluid" style="width: 125px;" id="img-profile">
+                            <h4 class="my-3">{{infoUser.first_name + " " + infoUser.last_name}}</h4>
+                            <p class="text-muted mb-4"><i>{{infoUser.type_user=="teacher"?"Profesor":infoUser.type_user=="student"?"Estudiante":"Adminisytrador"}}</i></p>
+                            <div class="d-flex justify-content-center mb-2">
+                                 @if(!isEdit){
+                                    <button type="button" class="btn btn-primary" (click)="changeEdit()">Editar perfil</button>
+                                    <button type="button" class="btn btn-secondary" (click)="openModalUploadPhoto(uploadPhoto)">Nueva foto</button>
+                                 }
+                                 @else {
+                                    <button type="button" class="btn btn-primary" (click)="editUserInformation()">Guardar</button>
+                                    <button type="button" class="btn btn-danger" (click)="cancelEdit()">Cancelar</button>
+                                 }
+                            </div>
+                            <div class="local text-center">
+                                <p class="text-muted mb-1">Quevedo - Ecuador</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <!--Card de información personal-->
+                    <form class="card mb-4" [formGroup]="userProfileForm">
+                        <div class="card-body">
+                            <h5 class="mb-4"> <fa-icon [icon]="iconInformation" class="icon-first_name"></fa-icon> <b> Información básica</b></h5>
+                            <!--Nombres y apellidos-->
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="mb-1"><b>Nombres</b></label>
+                                        <input type="text" class="form-control form-control-lg bg-light fs-6" formControlName="first_name"
+                                            placeholder="Nombres" [ngClass]="{
+                                                'is-invalid': userProfileForm.get('first_name')?.hasError('required') && userProfileForm.get('first_name')?.touched || userProfileForm.get('first_name')?.hasError('pattern'),
+                                                'is-valid': userProfileForm.get('first_name')?.value?.length >= 4 && userProfileForm.get('first_name')?.hasError('pattern') == false
+                                              }" [maxlength]="25" [readOnly]="!isEdit">
+                                        @if(userProfileForm.get('first_name')?.hasError('required') && userProfileForm.get('first_name')?.touched){
+                                            <div class="validators">
+                                                <small>¡Este campo es requerido!</small>
+                                            </div>
+                                        }
+                                        @if(userProfileForm.get('first_name')?.hasError('pattern')){
+                                            <div class="validators">
+                                                <small>¡Solo se permiten letras!</small>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="mb-1"><b>Apellidos</b></label>
+                                        <input type="text" class="form-control form-control-lg bg-light fs-6" formControlName="last_name"
+                                            placeholder="Apellidos" [ngClass]="{
+                                                'is-invalid': userProfileForm.get('last_name')?.hasError('required') && userProfileForm.get('last_name')?.touched || userProfileForm.get('last_name')?.hasError('pattern'),
+                                                'is-valid': userProfileForm.get('last_name')?.value?.length >= 4 && userProfileForm.get('last_name')?.hasError('pattern') == false
+                                              }" [maxlength]="25" [readOnly]="!isEdit">
+                                        @if(userProfileForm.get('last_name')?.hasError('required') && userProfileForm.get('last_name')?.touched){
+                                            <div class="validators">
+                                                <small>¡Este campo es requerido!</small>
+                                            </div>
+                                        }
+                                        @if(userProfileForm.get('last_name')?.hasError('pattern')){
+                                            <div class="validators">
+                                                <small>¡Solo se permiten letras!</small>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                             <!--Teléfono y edad-->
+                             <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="mb-1"><b>Teléfono</b></label>
+                                        <input type="text" class="form-control form-control-lg bg-light fs-6" formControlName="whatsapp"
+                                            placeholder="-------" [ngClass]="{
+                                                'is-invalid': userProfileForm.get('whatsapp')?.hasError('required') && userProfileForm.get('whatsapp')?.touched || userProfileForm.get('whatsapp')?.hasError('pattern'),
+                                                'is-valid': userProfileForm.get('whatsapp')?.value?.length >= 4 && userProfileForm.get('whatsapp')?.hasError('pattern') == false
+                                              }" [maxlength]="10" [readOnly]="!isEdit">
+                                        @if(userProfileForm.get('whatsapp')?.hasError('required') && userProfileForm.get('whatsapp')?.touched){
+                                            <div class="validators">
+                                                <small>¡Este campo es requerido!</small>
+                                            </div>
+                                        }
+                                        @if(userProfileForm.get('whatsapp')?.hasError('pattern')){
+                                            <div class="validators">
+                                                <small>¡Solo se permiten números!</small>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="mb-1"><b>Fecha de nacimiento</b></label>
+                                        <input type="date" class="form-control form-control-lg bg-light fs-6" formControlName="birth_date"
+                                            placeholder="Apellidos" [ngClass]="{
+                                                'is-invalid': userProfileForm.get('birth_date')?.hasError('required') && userProfileForm.get('birth_date')?.touched || userProfileForm.get('birth_date')?.hasError('pattern'),
+                                                'is-valid': userProfileForm.get('birth_date')?.value?.length >= 4 && userProfileForm.get('birth_date')?.hasError('pattern') == false
+                                              }" readOnly>
+                                        @if(userProfileForm.get('birth_date')?.hasError('required') && userProfileForm.get('birth_date')?.touched){
+                                            <div class="validators">
+                                                <small>¡Este campo es requerido!</small>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Correo y telegram-->
+                            <div class="row">
+                                <div class="col-12 col-md-8 col-lg-8">
+                                    <div class="mb-3">
+                                        <label class="mb-1"><b>Correo electrónico</b></label>
+                                        <input type="text" class="form-control form-control-lg bg-light fs-6" formControlName="email"
+                                            placeholder="Correo" [ngClass]="{
+                                                'is-valid': userProfileForm.get('email')?.value?.length >= 4 && userProfileForm.get('email')?.hasError('pattern') == false
+                                              }" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-4">
+                                    <div class="mb-3">
+                                        <label class="mb-1"><b>Telegram</b></label>
+                                        <input type="text" class="form-control form-control-lg bg-light fs-6" formControlName="telegram"
+                                            placeholder="-------" [ngClass]="{
+                                                'is-invalid': userProfileForm.get('telegram')?.hasError('required') && userProfileForm.get('telegram')?.touched || userProfileForm.get('telegram')?.hasError('pattern'),
+                                                'is-valid': userProfileForm.get('telegram')?.value?.length >= 4 && userProfileForm.get('telegram')?.hasError('pattern') == false
+                                              }" [maxlength]="30" [readOnly]="!isEdit">
+                                        @if(userProfileForm.get('telegram')?.hasError('required') && userProfileForm.get('telegram')?.touched){
+                                            <div class="validators">
+                                                <small>¡Este campo es requerido!</small>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<!--Modal para poder subir una foto a Google-->
+<ng-template #uploadPhoto>
+    <app-upload-photo-profile></app-upload-photo-profile>
+ </ng-template>

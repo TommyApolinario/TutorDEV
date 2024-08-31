@@ -1,0 +1,43 @@
+body {
+    border-radius: 10px;
+    padding: 0 15px;
+}
+
+.div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-title{
+    color: var(--primary-color);
+}
+
+.btn-secondary{
+    border-radius: 50px;
+}
+
+.validators {
+    color: #FC3B56;
+}
+
+
+/*For small screens*/
+@media screen and (max-width: 760px) {
+    #title {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .div .btn-primary {
+        font-size: 5px;
+        width: auto;
+    }
+
+    .action-buttons{
+        display: block;
+    }
+
+    .action-buttons>button{
+        width: 100%;
+    }
+}

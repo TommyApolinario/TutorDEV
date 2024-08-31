@@ -1,0 +1,56 @@
+<app-spinner *ngIf="!spinnerStatus"></app-spinner>
+
+<body>
+    <!--SideBar-->
+    <section id="sidebar">
+            <a class="brand mt-1" (click)="goToHome()"> <img src="../../../assets/logo-poliword.jpg" alt="img-profile" class="rounded-circle">
+                Unidev</a>
+            <ul class="side-menu">
+                <li>
+                    @if(typeUser== "student"){
+                        <a [routerLink]="'learn/modules'" routerLinkActive="active"><fa-icon class="icon" [icon]="iconLearn"></fa-icon>
+                            Aprender</a>
+                    }
+                    @else if(typeUser== "teacher"){
+                        <a [routerLink]="'dashboard/options'" routerLinkActive="active"><fa-icon class="icon" [icon]="iconHome"></fa-icon>
+                            Inicio</a>
+                    }
+                </li>
+                @for(option of optionsMenu; track option.icon){
+                    <li>
+                        <a [routerLink]="option.link" routerLinkActive="active"><fa-icon class="icon" [icon]="option.icon"></fa-icon>
+                            {{option.optionName}}</a>
+                    </li>
+                }
+            </ul>
+    </section>
+
+    <!--NavBar-->
+    <section id="content">
+        <nav>
+            <fa-icon class="toggle-sidebar" [icon]="iconBars"></fa-icon>
+            <form action="#">
+            </form>
+
+            <div class="profile d-flex">
+                <img [src]="userInformation.url_avatar?userInformation.url_avatar:'../../../assets/user-profile.png'" alt="img-profile">
+                <p class="mt-2">&nbsp;&nbsp;{{userInformation.first_name + " " + userInformation.last_name}} <fa-icon [icon]="iconArrowDown"></fa-icon></p>
+                <ul class="profile-link">
+                    <div class="info">
+                        <p><small><i class="text-capitalize">{{userInformation.type_user}}</i></small> <br />{{userInformation.first_name + userInformation.last_name}}</p>
+                    </div>
+                    <hr>
+                    <li><a [routerLink]="'user/user-profile'"><fa-icon [icon]="iconProfile"></fa-icon> Mi perfil</a>
+                    </li>
+                    <li><a [routerLink]="'user/change-passwrod'"><fa-icon [icon]="iconPassword"></fa-icon> Contraseña</a></li>
+                    <li><a (click)="signOut()"><fa-icon [icon]="iconLogOut"></fa-icon> Cerrar sesión</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!--Contenedor del dashboard-->
+        <main>
+            <router-outlet></router-outlet>
+        </main>
+    </section>
+</body>

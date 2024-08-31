@@ -1,0 +1,66 @@
+img {
+    width: 120px;
+}
+
+.text-root{
+    font-size: 17px !important;
+}
+
+/*Hover y no hover para cuando se selecciona una opción*/
+.option:not(.selected) .option-number,
+.option:not(.selected) label {
+    color: #ccc; /* Color de texto original */
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    color: var(--text-color);
+    border-radius: 12px;
+    width: 100%;
+    padding: 8px;
+    cursor: pointer !important;
+}
+
+
+.option-number {
+    background-color: white;
+    color: #ccc;
+    border: 1px solid #ccc;
+    padding: 5px 12px;
+    border-radius: 5px;
+    margin-right: 2rem;
+}
+
+.option label {
+    /*width: 100%; Quitar este comentario para alinear a la izquierda*/
+    margin-right: 2rem;
+    padding: 8px;
+    border: none;
+    background-color: transparent;
+    font-size: 18px !important;
+}
+
+/*Para darle el primary y secondary color cuando selecciono una opción*/
+.selected {
+    background-color: #E2E0F9;
+    border-color: var(--primary-color);
+}
+
+.selected>.option-number {
+    background-color: #E2E0F9;
+    border-color: var(--primary-color);
+    color:#272727 !important;
+}
+
+.selected>label {
+    color: #272727 !important;
+}
+
+/*For small screens*/
+@media screen and (max-width: 768px) {
+    .order>img {
+        display: none;
+    }
+}

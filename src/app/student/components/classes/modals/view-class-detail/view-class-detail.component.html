@@ -1,0 +1,132 @@
+<div class="container">
+    <div class="modal-header">
+        <h4 class="modal-title"><fa-icon [icon]="iconClass"></fa-icon> Detalles de la clase</h4>
+    </div>
+    <div class="modal-body">
+        <!--Nombre de la clase-->
+        <div class="row">
+            <div class="col-12">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Nombre</b></label>
+                    @if(classDetailLocal.name == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{classDetailLocal.name}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!--Curso y Paralelo-->
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Curso</b></label>
+                    @if(classDetailLocal.course == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p class="iconsPublicPrivate">{{classDetailLocal.course}}</p>
+                    }
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Paralelo</b></label>
+                    @if(classDetailLocal.paralelo == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{classDetailLocal.paralelo}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+         <!--Profesor y correo-->
+         <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Profesor</b></label>
+                    @if(classDetailLocal.teacher.first_name == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p class="iconsPublicPrivate">{{classDetailLocal.teacher.first_name}} {{classDetailLocal.teacher.last_name}}</p>
+                    }
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Email del profesor</b></label>
+                    @if(classDetailLocal.teacher.email == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{classDetailLocal.teacher.email}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!--Código-->
+        <div class="row">
+            <div class="col-12">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Código</b></label>
+                    @if(classDetailLocal.code == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        @if(classDetailLocal.code != ""){
+                            <p>{{classDetailLocal.code}}</p>
+                        }
+                        @else {
+                            <p>Este módulo no contiene un código</p>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!--Descripción-->
+        <div class="row">
+            <div class="col-12">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Descripción</b></label>
+                    @if(classDetailLocal.description == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{classDetailLocal.description}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="modal.dismissAll()" type="button" class="btn btn-primary btn">Aceptar</button>
+    </div>
+</div>

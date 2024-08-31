@@ -1,0 +1,58 @@
+.no-results {
+  text-align: center;
+  background-color: #fafafa;
+}
+
+.iconPublicPrivate>fa-icon {
+  color: #bebebe;
+}
+
+/*Tabla con datos*/
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+thead th {
+  background-color: var(--secondary-color) !important;
+  color: #474747;
+}
+
+.card {
+  border-radius: .2rem;
+}
+
+.table-scroll {
+  border-radius: .2rem;
+}
+
+.table-scroll table thead th {
+  font-size: .9rem;
+}
+
+th,
+td {
+  font-size: .8rem;
+}
+
+thead {
+  top: 0;
+  position: sticky;
+}
+
+.container-spinner {
+  text-align: center !important;
+  align-items: center;
+}
+
+fa-icon {
+  color: var(--primary-color);
+}
+
+
+.table-responsive{
+  height: auto !important;
+  overflow-y: auto !important;
+}

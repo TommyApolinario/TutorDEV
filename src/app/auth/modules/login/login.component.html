@@ -1,0 +1,52 @@
+<app-spinner *ngIf="!spinnerStatus"></app-spinner>
+
+<body class="row">
+    <div class="container d-flex justify-content-center">
+        <div class="box" data-aos="flip-left">
+            <h3 class="text-center mb-5">Inicio de sesión</h3>
+            <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+
+                <label>Unidev es la aplicación web que te ayuda a mejorar tus habilidades Matematicas, con actividades dinámicas.</label>
+
+                <!--Correo electrónico-->
+                <div class="mb-3">
+                    <label class="mb-1"><b>Usuario</b></label>
+                    <input type="email" class="form-control form-control-lg bg-light fs-6"
+                        formControlName="email" placeholder="Usuario*">
+                </div>
+
+                <!--Contraseña-->
+                <div class="mb-5">
+                    <label class="mb-1"><b>Contraseña</b></label>
+                    <div class="input-group">
+                        <input type="{{getPasswordInputType()}}" class="form-control form-control-lg bg-light fs-6"
+                            formControlName="password" placeholder="Contraseña*">
+                        <span class="input-group-text" (click)="togglePasswordVisibility()">
+                            <fa-icon [icon]="showPassword  ? iconHidePassword: iconViewPassword"></fa-icon>
+                        </span>
+                    </div>
+                </div>
+
+                <!--Botón para iniciar sesión-->
+                <div class="content-buttons">
+                    <button type="submit" class="mb-3 btn btn-lg btn-primary w-100 fs-6">Iniciar sesión</button>
+                    <button type="button" (click)="goToForgotPassword()"
+                        class="btn-lg btn-outline-primary w-100 fs-6"><small> <fa-icon
+                                [icon]="iconForgotPassword"></fa-icon> Olvidé la contraseña</small>
+                    </button>
+                </div>
+
+                <!--Redirigir al fomulario de registro-->
+                <div class="no-account">
+                    <p class="mt-4 text-center"> <a (click)="goToRegisterForm()" class="link">¿No tienes una cuenta? Regístrate ahora</a></p>
+                </div>
+
+                <!--Términos y condiciones-->
+                <div class="row text-center mt-5 terms-and-conditions">
+                    <span>Al registrarte en Unidev, aceptas nuestros <b class="terms" (click)="goToTermsConditions(1)">Términos y Condiciones</b> y
+                        también la <b class="politics" (click)="goToTermsConditions(2)">Política de Privacidad</b></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

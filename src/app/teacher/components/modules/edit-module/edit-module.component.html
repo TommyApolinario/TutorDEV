@@ -1,0 +1,138 @@
+@if(!spinnerStatus){
+<app-spinner></app-spinner>
+}
+
+<body data-aos="fade-right" data-aos-duration="500">
+    <div class="row justify-content-center">
+        <div class="col-12 container-info">
+            <div class="div mt-3 mx-1">
+                <h4 id="titulo"><fa-icon [icon]="iconEdit" class="icon-title"></fa-icon> Editar módulo</h4>
+                <button type="button" class="btn btn-secondary btn-xs" (click)="goToListModules()">
+                    <fa-icon [icon]="iconBack" class="icon-button"></fa-icon></button>
+            </div>
+            <br />
+
+            <form class="mt-2" [formGroup]="editForm">
+                <!--Titulo-->
+                <div class="row">
+                    <div class="mb-3">
+                        <label class="mb-1"><b>Título</b></label>
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" formControlName="title"
+                            placeholder="Título*"
+                            [ngClass]="{
+                                    'is-invalid': editForm.get('title')?.hasError('required') && editForm.get('title')?.touched || editForm.get('title')?.hasError('pattern') }"
+                            [maxlength]="50">
+                        @if(editForm.get('title')?.hasError('required') && editForm.get('title')?.touched){
+                            <div class="validators">
+                                <small>¡Este campo es requerido!</small>
+                            </div>
+                        }
+                        @if(editForm.get('title')?.hasError('pattern')){
+                            <div class="validators">
+                                <small>¡Solo se permiten letras!</small>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!--Descripción corta-->
+                <div class="row">
+                    <div class="mb-3">
+                        <label class="mb-1"><b>Descripción corta</b></label>
+                        <input type="text" class="form-control form-control-lg bg-light fs-6"
+                            formControlName="shortDescription" placeholder="Descripción corta*"
+                            [ngClass]="{
+                                    'is-invalid': editForm.get('shortDescription')?.hasError('required') && editForm.get('shortDescription')?.touched || editForm.get('shortDescription')?.hasError('pattern') }"
+                            [maxlength]="80">
+                        @if(editForm.get('shortDescription')?.hasError('required') && editForm.get('shortDescription')?.touched){
+                            <div class="validators">
+                                <small>¡Este campo es requerido!</small>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!--Teoría-->
+                    <div class="col-12 col-md-6 mb-3">
+                        <div class="mb-3">
+                            <label class="mb-1"><b>Teoría</b></label>
+                            <textarea class="form-control form-control-lg bg-light fs-6" formControlName="textRoot"
+                                placeholder="Descripción*" rows="5"
+                                [ngClass]="{
+                                        'is-invalid': editForm.get('textRoot')?.hasError('required') && editForm.get('textRoot')?.touched }">
+                            </textarea>
+                            @if(editForm.get('textRoot')?.hasError('required') && editForm.get('textRoot')?.touched){
+                                <div class="validators">
+                                    <small>¡Este campo es requerido!</small>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-md-6 mb-3">
+                        <!--URL de la portada-->
+                        <div class="mb-3">
+                            <label class="mb-1"><b>URL portada</b></label>
+                            <input type="text" class="form-control form-control-lg bg-light fs-6"
+                                formControlName="imgBackURL" placeholder="URL portada"
+                                [ngClass]="{
+                                        'is-invalid': editForm.get('imgBackURL')?.hasError('required') && editForm.get('imgBackURL')?.touched || editForm.get('imgBackURL')?.hasError('pattern') }">
+                            @if(editForm.get('imgBackURL')?.hasError('required') && editForm.get('imgBackURL')?.touched){
+                                <div class="validators">
+                                    <small>¡Este campo es requerido!</small>
+                                </div>
+                            }
+                        </div>
+                        <div class="row">
+                            <!--Visibilidad-->
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="mb-1"><b>Visibilidad</b></label>
+                                    <select class="form-select form-select-md" aria-label=".form-select-lg example"
+                                        [(ngModel)]="optionVisibility" formControlName="isPublic"
+                                        [ngClass]="{
+                                        'is-invalid': editForm.get('isPublic')?.hasError('required') && editForm.get('isPublic')?.touched }">
+                                        <option value="" selected>Seleccione una opción</option>
+                                        <option value="true">Público</option>
+                                        <option value="false">Privado</option>
+                                    </select>
+                                    @if(editForm.get('isPublic')?.hasError('required') && editForm.get('isPublic')?.touched){
+                                        <div class="validators">
+                                            <small>¡Este campo es requerido!</small>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <!--Dificultad-->
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="mb-1"><b>Dificultad</b></label>
+                                    <select class="form-select form-select-md" aria-label=".form-select-lg example"
+                                        [(ngModel)]="optionDifficulty" formControlName="difficulty"
+                                        [ngClass]="{
+                                            'is-invalid': editForm.get('difficulty')?.hasError('required') && editForm.get('difficulty')?.touched }">
+                                        <option value="" selected>Seleccione una opción</option>
+                                        <option value="hard">Difícil</option>
+                                        <option value="medium">Medio</option>
+                                        <option value="easy">Fácil</option>
+                                    </select>
+                                    @if(editForm.get('difficulty')?.hasError('required') && editForm.get('difficulty')?.touched){
+                                        <div class="validators">
+                                            <small>¡Este campo es requerido!</small>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="action-buttons d-flex justify-content-end mb-3">
+                <button type="button" class="btn btn-primary btn-md" [disabled]="editForm.invalid"
+                    (click)="editModule()">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</body>

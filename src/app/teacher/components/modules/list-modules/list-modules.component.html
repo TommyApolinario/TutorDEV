@@ -1,0 +1,128 @@
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
+
+<body>
+    <div class="row justify-content-center">
+        <div class="col-12 container-info">
+
+            <div class="div mt-3 mx-1">
+                <h4 id="titulo"><fa-icon [icon]="iconModules" class="icon-title"></fa-icon> Módulos</h4>
+                <button type="button" class="btn btn-primary btn-sm" (click)="goToListModules()">
+                    <fa-icon [icon]="iconAdd" class="icon-button"></fa-icon> Nuevo módulo</button>
+            </div>
+            <br />
+
+            <div class="row">
+                <!--Para filtrar por todos los módulos o creados por el profesor-->
+                <div class="col-12 col-md-3 col-lg-3">
+                    <form>
+                        <select class="form-select" aria-label="Default select example" style="margin-bottom: 12px;"
+                            (change)="onFilterChange($event)">
+                            <option value="for-me" selected>Creados por mi</option>
+                            <option value="all-modules">Todos los módulos</option>
+                        </select>
+                    </form>
+                </div>
+                <!--Buscar módulo por nombre (Título)-->
+                <div class="col-12 col-md-4 col-lg-4 mb-3">
+                    <form>
+                        <input class="form-control me-1" type="text" placeholder="Buscar..." name="buscarMovimientos"
+                            [(ngModel)]="modulesToSearch">
+                    </form>
+                </div>
+                <!--Importar los datos de la tabla a Excel-->
+                <div class="col-12 col-md-5 col-lg-5 export-buttons mb-3">
+                    <button (click)="downloadXLSX()" type="button" class="btn save-xlsx" data-bs-toggle="mensaje"
+                        title="Exportar a XLSX">
+                        <fa-icon [icon]="iconXlsx"></fa-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!--Tabla con el listado de módulos-->
+            <div class="card">
+                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true"
+                    style="position: relative;">
+                    <table class="table table-striped mb-0" id="htmlExcelTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">N°</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Creador por</th>
+                                <th scope="col">Visibilidad</th>
+                                <th scope="col">Fecha de creación</th>
+                                <th scope="col">Fecha de actualización</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(arrayModules.length > 0) {
+                                @for(module of arrayModules | searchRegisters:modulesToSearch:searchBy; track $index){
+                                    <tr>
+                                        <th scope="row">{{$index+1}}</th>
+                                        <td data-bs-toggle="mensaje" title="{{module.title}}">{{module.title}}</td>
+                                        <td>{{module.create_by.first_name + " " + module.create_by.last_name}}</td>
+                                        <td class="iconPublicPrivate">
+                                            <fa-icon [icon]="module.is_public ? iconPublic : iconPrivate"></fa-icon>
+                                            {{module.is_public ? " Público" : " Privado"}}
+                                          </td>
+                                        <td>{{module.created_at}}</td>
+                                        <td>{{module.updated_at}}</td>
+                                        <td class="actions">
+                                            <fa-icon data-bs-toggle="mensaje" title="Ver detalles" id="iconViewDetails"
+                                                [icon]="iconViewDetails" (click)="openModalViewModuleDetails(viewModuleDetail, module.id)"></fa-icon>
+                                            <fa-icon data-bs-toggle="mensaje" title="Ver actividades" id="iconViewActivities"
+                                                [icon]="iconViewActivities" (click)="openModalViewActivities(viewActivities, module.id)"></fa-icon>
+                                            @if(statusFilter=='for-me'){
+                                                <fa-icon data-bs-toggle="mensaje" title="Editar" id="iconEdit"
+                                                [icon]="iconEdit" (click)="editModule(module, module.id)"></fa-icon>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            @else{
+                                <tr>
+                                    <td colspan="7" class="no-results">Sin resultados...</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--Paginación-->
+            <br />
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled" [class.disabled]="currentPage === 1">
+                        <a class="page-link custom-page-link"
+                            (click)="currentPage > 1 ? pageChanged(currentPage - 1) : null" tabindex="-1"><fa-icon
+                                [icon]="iconBack"></fa-icon></a>
+                    </li>
+                    @for(page of arrayPaginator; track $index){
+                        <li class="page-item" [class.active]="currentPage === $index + 1">
+                            <a class="page-link custom-page-link" (click)="pageChanged($index+1)">{{ $index+1 }}</a>
+                        </li>
+                    }
+                    <li class="page-item" [class.disabled]="currentPage === arrayPaginator.length">
+                        <a class="page-link custom-page-link"
+                            (click)="currentPage < arrayPaginator.length ? pageChanged(currentPage +1) : null"><fa-icon
+                                [icon]="iconNext"></fa-icon></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</body>
+
+<!--Modal para ver información detallada de un módulo-->
+<ng-template #viewModuleDetail>
+    <app-view-details></app-view-details>
+ </ng-template>
+
+ <!--Modal para ver las actividades de un módulo-->
+<ng-template #viewActivities>
+    <app-view-activities></app-view-activities>
+ </ng-template>

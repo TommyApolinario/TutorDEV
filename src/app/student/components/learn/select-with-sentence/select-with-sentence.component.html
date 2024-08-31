@@ -1,0 +1,30 @@
+<body data-aos="fade-left">
+    <!--Orden-->
+    <div class="row mt-4 mb-4">
+        <h4><b>Existe una palabra mal escrita, selecciona la correcta</b></h4>
+    </div>
+
+    <!--Pregunta-->
+    <div class="row d-flex mb-4">
+        <div class="col-12 col-md-3 col-lg-3 order d-flex align-items-center justify-content-center">
+            <img [src]="randomImagePath"
+                alt="img-activity">
+        </div>
+        <div class="col-12 col-md-9 col-lg-9 d-flex align-items-center justify-content-center">
+            <p class="text-root">{{activity.question.text_root}}</p>
+        </div>
+    </div>
+
+    <!--Opciones-->
+    <div class="row" role="group" aria-label="Basic radio toggle button group">
+        @for(option of arrayOptions.slice(0,3); track option.id){
+        <div class="col-12 d-flex justify-content-start align-items-center mb-3 option"
+            [class.selected]="selectedOptionForColor.includes(option.idHTML)" (click)="selectOption(option.idHTML, [option.label])">
+            <div class="option-number">{{ option.optionNumber }}</div>
+            <input type="checkbox" class="btn-check" id="{{ option.idHTML }}" autocomplete="off"
+                [(ngModel)]="option.selected">
+            <label class="btn btn-outline-secondary" [for]="option.idHTML">{{ option.label }}</label>
+        </div>
+        }
+    </div>
+</body>

@@ -1,0 +1,17 @@
+body{
+    padding: 0 15px;
+    border-radius: 10px;
+}
+
+.icon-title{
+    color: var(--primary-color);
+}
+
+.div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-secondary{
+    border-radius: 50px;
+}

@@ -1,0 +1,61 @@
+<body class="mt-2">
+    <h5><fa-icon [icon]="iconVideo"></fa-icon> Videos de ayuda</h5>
+    <div [id]="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+            <!--Primeros 3 videos carousel-->
+            <div class="carousel-item active">
+                <div class="cards-wrapper">
+                    @for(video of arrayVideosDetail1; track $index){
+                    <div class="card" (click)="redirectToYouTubePlaylist()">
+                        <img [src]="video.picture" style="width: 100%; height: 100%;" class="card-img-top"
+                            alt="portada-video">
+                        <div class="card-footer"> <!--Máximo 30 caracteres al consumir la API-->
+                            <h6 class="card-title mt-2"><fa-icon [icon]="iconVideo"></fa-icon> {{video.title}}</h6>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="carousel-item active">
+                <div class="cards-wrapper">
+                    @for(video of arrayVideosDetail2; track $index){
+                    <div class="card" (click)="redirectToYouTubePlaylist()">
+                        <img [src]="video.picture" style="width: 100%; height: 100%;" class="card-img-top"
+                            alt="portada-video">
+                        <div class="card-footer"> <!--Máximo 30 caracteres al consumir la API-->
+                            <h6 class="card-title mt-2"><fa-icon [icon]="iconVideo"></fa-icon> {{video.title}}</h6>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!--Segundos 3 videos carousel-->
+           <!--  <div class="carousel-item">
+                <div class="cards-wrapper">
+                    @for(video of arrayVideosDetail1; track $index){
+                    <div class="card" (click)="goToVideoDetail(video)">
+                        <img [src]="video.picture" style="width: 100%; height: 100%;" class="card-img-top"
+                            alt="portada-video">
+                        <div class="card-footer">
+                            <h6 class="card-title mt-2"><fa-icon [icon]="iconVideo"></fa-icon> {{video.title}}</h6>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div> -->
+        </div>
+
+        <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#' + carouselExample"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#' + carouselExample"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</body>

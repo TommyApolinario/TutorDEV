@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.leave fa-icon{
+    cursor: pointer;
+}
+
+.container-general{
+    overflow-y: auto;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.container-general::-webkit-scrollbar{
+    width: 8px;
+    height: 14px;
+    
+}
+
+.container-general::-webkit-scrollbar-thumb{
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.container-general::-webkit-scrollbar-thumb:hover,
+.container-general::-webkit-scrollbar-thumb:active{
+    background-color: #aaa;
+}
+
+.container-general::-webkit-scrollbar-track{
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+
+.container-theory{
+    padding: 20px;
+}
+
+
+.footer{
+    border-top: 1px solid #f1f1f1;
+    box-shadow: 0px -5px 10px 0px rgba(105, 105, 105, 0.2);
+    height: 15vh;
+    background-color: #fff;
+}
+
+.content-progress{
+    padding: 0px 20px;
+}
+
+.progress-bar{
+    background-color: var(--primary-color) !important;
+    border-radius: 50px !important;
+}
+
+.leave{
+    font-size: 20px;
+    color: var(--text-color);
+}
+
+.quantity-questions{
+    font-size: 20px;
+    color:var(--primary-color);
+}
+
+.container-activity{
+    height: 70vh;
+}
+
+.btn-info {
+    background-color: var(--primary-color);
+    color: var(--white) !important;
+    border-color: var(--primary-color);
+    padding: 10px 20px !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+}
+
+.btn-outline-info {
+    background-color: var(--white);
+    color: var(--primary-color) !important;
+    border-color:var(--primary-color);
+    padding: 10px 20px !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+}
+
+.feedback{
+    height: 2rem;
+}

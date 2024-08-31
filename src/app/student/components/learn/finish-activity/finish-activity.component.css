@@ -1,0 +1,28 @@
+.finish-container {
+    height: 50vh;
+}
+
+h1, h4{
+    color: var(--primary-color);
+}
+
+h3{
+    color: var(--text-color);
+}
+
+.points-earned{
+    padding: 20px 15px;
+    height: min-content !important;
+    width: auto !important;
+    background-color: var(--secondary-color);
+    border-radius: 100%;
+}
+
+.container-button{
+    text-align: center;
+    width: 50%;
+}
+
+.btn{
+    padding: 10px 20px !important;
+}

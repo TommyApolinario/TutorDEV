@@ -1,0 +1,12 @@
+#htmlExcelTable td:nth-child(3),
+#htmlExcelTable th:nth-child(3) {
+  max-width: 200px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  position: relative !important;
+}
+
+.modal-title>fa-icon{
+    color: var(--primary-color) !important;
+}

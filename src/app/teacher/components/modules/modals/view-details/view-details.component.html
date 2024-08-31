@@ -1,0 +1,153 @@
+<div class="container">
+    <div class="modal-header">
+        <h4 class="modal-title"><fa-icon [icon]="iconModule"></fa-icon> Detalles del módulo</h4>
+    </div>
+    <div class="modal-body">
+        <!--Título-->
+        <div class="row">
+            <div class="col-12">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Título</b></label>
+                    @if(moduleDetail.title == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{moduleDetail.title}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!--Visibilidad, Dificultad y Código-->
+        <div class="row">
+            <!--Visbilidad-->
+            <div class="col-12 col-md-3">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Visibilidad</b></label>
+                    @if(moduleDetail.is_public == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p class="iconsPublicPrivate"> <fa-icon
+                            [icon]="moduleDetail.is_public ? iconPublic : iconPrivate"></fa-icon> {{moduleDetail.is_public ?
+                        "Pública" : " Privada"}}</p>
+                    }
+                </div>
+            </div>
+            <!--Dificultad-->
+            <div class="col-12 col-md-3">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Dificultad</b></label>
+                    @if(moduleDetail.difficulty == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{moduleDetail.difficulty}}</p>
+                    }
+                </div>
+            </div>
+            <!--Código-->
+            <div class="col-12 col-md-6">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Código</b></label>
+                    @if(moduleDetail.code == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        @if(moduleDetail.code != ""){
+                            <p>{{moduleDetail.code}}</p>
+                        }
+                        @else {
+                            <p>Este módulo no contiene un código</p>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!--Fecha de creación y actualización-->
+        <div class="row">
+            <!--Fecha de creación-->
+            <div class="col-12 col-md-6">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Fecha de creación</b></label>
+                    @if(moduleDetail.created_at == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{moduleDetail.created_at}}</p>
+                    }
+                </div>
+            </div>
+            <!--Fecha de actualización-->
+            <div class="col-12 col-md-6">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Fecha de actualización</b></label>
+                    @if(moduleDetail.updated_at == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{moduleDetail.updated_at}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!--Descripción corta-->
+        <div class="row">
+            <div class="col-12">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Descripción corta</b></label>
+                    @if(moduleDetail.short_description == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{moduleDetail.short_description}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!--Descripción detallada-->
+        <div class="row">
+            <div class="col-12">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Descripción detallada</b></label>
+                    @if(moduleDetail.text_root == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{moduleDetail.text_root}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="modal.dismissAll()" type="button" class="btn btn-primary btn">Aceptar</button>
+    </div>
+</div>

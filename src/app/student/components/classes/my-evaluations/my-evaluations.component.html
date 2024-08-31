@@ -1,0 +1,55 @@
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
+
+<body>
+    <div class="d-flex flex-wrap mb-2 justify-content-between">
+        <div class="col-12 col-md-3 mt-3 title-module">
+            <h4 id="titulo"><fa-icon [icon]="iconMyEvaluations" class="icon-title"></fa-icon> Cuestionarios</h4>
+        </div>
+
+        <button type="button" class="btn btn-secondary btn-sm mt-3"
+            (click)="goToMyClass()">
+            <fa-icon [icon]="iconBack"></fa-icon> Atrás</button>
+    </div>
+
+    <div class="row">
+        <span><b>Asignatura:</b> Lengua y Literatura</span>
+        <span><b>Curso:</b> 8VO A</span>
+        <span><b>Período:</b> 2023 - 2024</span>
+    </div>
+
+
+    <div class="row container-evaluations mt-3 d-flex justify-content-between">
+
+        <div class="col-lg-6 col-md-6 col-xl-6 col-sm-12 col-xs-12 mb-3">
+            <div class="evaluation d-flex">
+                <div class="icon">
+                    <fa-icon [icon]="iconEvaluation" class="icon-title fs-1"></fa-icon>
+                </div>
+                <div class="info">
+                    <h5 class="mt-2 mb-1">El uso de la Z y la S</h5>
+                    <p class="mb-0"><b>Tiempo:</b> 10min</p>
+                    <p class="mb-0"><b>Tipo:</b> Sumativa</p>
+                    <p class="mb-0"><b>Disponible el:</b> 10/02/2024 - 17:00 </p>
+                    <p class="mb-2"><b>Finaliza el:</b> 10/02/2024 - 18:00 </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-xl-6 col-sm-12 col-xs-12 mb-3">
+            <div class="evaluation d-flex">
+                <div class="icon">
+                    <fa-icon [icon]="iconEvaluation" class="icon-title fs-1"></fa-icon>
+                </div>
+                <div class="info">
+                    <h5 class="mt-2 mb-1">El uso de la Z y la S</h5>
+                    <p class="mb-0"><b>Tiempo:</b> 10min</p>
+                    <p class="mb-0"><b>Tipo:</b> Sumativa</p>
+                    <p class="mb-0"><b>Disponible el:</b> 10/02/2024 a las 17:00 </p>
+                    <p class="mb-2"><b>Finaliza el:</b> 10/02/2024 a las 18:00 </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,23 @@
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
+
+<body data-aos="fade-left">
+    <div class="row finish-container d-flex justify-content-center">
+        <div class="container-info mt-5">
+            <h1 class="text-center">¡Haz terminado la práctica!</h1>
+            <h3 class="text-center mt-3">Obtuviste una puntuación de:</h3>
+        </div>
+
+        <div class="container-points mt-4 d-flex justify-content-center">
+            <div class="points-earned">
+                <h4 class="text-center mt-1">{{infoFinishLesson.qualification}} / 100</h4>
+            </div>
+        </div>
+
+        <div class="container-button mt-5">
+            <button type="submit" class="mb-3 btn btn-lg btn-primary w-100 fs-6"
+            (click)="goToListModules()">Finalizar y volver</button>
+        </div>
+    </div>
+</body>

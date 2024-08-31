@@ -1,0 +1,78 @@
+body {
+    padding: 0 15px;
+    border-radius: 10px !important;
+}
+
+.icon-title {
+    color: var(--primary-color);
+}
+
+.icon-button {
+    color: #FFF;
+}
+
+.div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.save-xlsx {
+    background-color: transparent;
+    border: 1px solid var(--primary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+#iconViewDetails {
+    font-size: 1rem !important;
+    margin-right: 12px;
+    cursor: pointer;
+    color: rgb(64, 140, 202) !important;
+}
+
+#iconActivateDesactivateUser {
+    font-size: 1rem !important;
+    margin-right: 12px;
+    cursor: pointer;
+    color: var(--primary-color) !important;
+}
+
+.iconPublicPrivate>fa-icon {
+    color: #bebebe;
+}
+
+#htmlExcelTable td:nth-child(2),
+#htmlExcelTable th:nth-child(2) {
+  max-width: 200px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  position: relative !important;
+}
+
+
+.profile-image>img {
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%; 
+    background-size: cover; 
+    background-position: center; 
+    margin: 0 auto; 
+}
+
+/*For small screens*/
+@media screen and (max-width: 760px) {
+    #title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .div {
+        display: block;
+    }
+
+    .div .btn-primary {
+        width: 100%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}

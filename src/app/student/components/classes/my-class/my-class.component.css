@@ -1,0 +1,21 @@
+.students,
+.view-details,
+.leave-class{
+    background-color: var(--secondary-color);
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.info-body-card {
+    font-size: 15px !important;
+}
+
+.students,
+.view-details{
+    color: var(--primary-color);
+}
+
+.leave-class{
+    color: var(--alert-color);
+}

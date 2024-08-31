@@ -1,0 +1,59 @@
+.container-video {
+    position: relative; /* Añadimos posición relativa para contener a .video-area */
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    height: 270px;
+    cursor: pointer;
+}
+
+.video-area {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.video-area fa-icon {
+    font-size: 50px;
+    color: #ccc;
+}
+
+.video-area h4 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #ccc;
+}
+
+.video-area p {
+    font-weight: 600;
+    width: 80%;
+    color: #ccc;
+}
+
+.container-video > .video-area > p {
+    text-align: center;
+}
+
+.validators {
+    text-align: center;
+}
+
+.validators small {
+    color: red;
+}
+
+.video-area video {
+    display: none; /* Ocultamos el reproductor de video */
+}

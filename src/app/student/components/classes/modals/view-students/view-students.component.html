@@ -1,0 +1,73 @@
+<!-- @if(!spinnerStatus){
+<app-spinner></app-spinner>
+} -->
+
+<div class="container">
+    <div class="modal-header">
+        <h4 class="modal-title"><fa-icon [icon]="codeClass"></fa-icon> Estudiantes de la clase</h4>
+    </div>
+    
+    <div class="modal-body">
+         <!--Buscar módulo por nombre (Título)-->
+         <div class="col-12 col-md-5 col-lg-5 mb-3">
+            <form>
+                <input class="form-control me-1" type="text" placeholder="Buscar por apellidos..." name="searchStudents"
+                    [(ngModel)]="studentsToSearch">
+            </form>
+        </div>
+        <div class="card" id="htmlTablePDF">
+            <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative;">
+                <table class="table table-striped mb-0" id="htmlExcelTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">N°</th>
+                            <th scope="col">Nombres</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Fecha de nacimiento</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(arrayStudents.length > 0) {
+                            @for(class of arrayStudents | searchRegisters:studentsToSearch:searchBy; track $index){
+                                <tr>
+                                    <th scope="row">{{$index+1}}</th>
+                                    <td>{{class.first_name}}</td>
+                                    <td>{{class.email}}</td>
+                                    <td>{{class.birth_date}}</td>
+                                    <td>
+                                        <div class="text-center"
+                                            [style.background-color]="class.status ? '#198754' : '#ccc'"
+                                            [style.border-radius]="class.status ? '5px' : '5px'"
+                                            [style.padding]="class.status ? '3px' : '3px'"
+                                            [style.color]="class.status ? 'white' : 'black'">
+                                            {{class.status? "Activo" : "Inactivo"}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        @else{
+                            @if(!spinnerStatus){
+                                <div class="text-center mt-2 mb-2">
+                                    <div class="spinner-border spinner-border-sm text-center" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                      </div>
+                                  </div>
+                            }
+                            @else {
+                                <tr>
+                                    <td colspan="5" class="no-results">Sin resultados...</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button (click)="modal.dismissAll()" type="button" class="btn btn-primary btn">Aceptar</button>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+@if(!spinnerStatus){
+<app-spinner></app-spinner>
+}
+
+<div class="container">
+    <div class="modal-header mt-3">
+        <h4 class="modal-title"><fa-icon [icon]="iconIA"></fa-icon> Generar pregunta con IA</h4>
+    </div>
+
+    <div mat-dialog-content class="mt-4">
+        <form class="row container-code" [formGroup]="questionIAForm">
+            <!--Contexto-->
+            <div class="col-12">
+                <label class="mb-1"><b>Contexto</b></label>
+                <textarea type="text" placeholder="Contexto*" class="form-control form-control-lg bg-light fs-6"
+                    formControlName="context" rows="4"
+                    [ngClass]="{
+                            'is-invalid': questionIAForm.get('context')?.hasError('required') && questionIAForm.get('context')?.touched || questionIAForm.get('context')?.hasError('pattern'),
+                            'is-valid': questionIAForm.get('context')?.hasError('required')==false && questionIAForm.get('context')?.hasError('pattern') == false && questionIAForm.get('context')?.value?.length >= 10}"></textarea>
+                @if(questionIAForm.get('context')?.hasError('required') &&
+                questionIAForm.get('context')?.touched){
+                <div class="validators">
+                    <small>¡Este campo es requerido!</small>
+                </div>
+                }
+            </div>
+
+            <!--Modelo de generación-->
+            <div class="col-12 mt-3">
+                <label class="mb-1"><b>Modelo de IA</b></label>
+                <select class="form-select form-select-md" aria-label=".form-select-lg example"
+                    [(ngModel)]="optionModel" formControlName="model" [ngClass]="{
+                                'is-invalid': questionIAForm.get('model')?.hasError('required') && questionIAForm.get('model')?.touched,
+                                'is-valid': optionModel != ''}" (change)="updateOptionModel($event)">
+                    <option value="" selected disabled>Seleccione una opción</option>
+                    <option value="3">Avanzado (Más preciso)</option>
+                    <option value="2">Genérico (Poco preciso)</option>
+
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="modal-footer mt-4 mb-3">
+        <button (click)="closeModal()" type="button" class="btn btn-secondary-primary btn">Cancelar</button>
+        <button (click)="generateQuestion()" [disabled]="!questionIAForm.valid" type="button"
+            class="btn btn-primary btn">Generar</button>
+    </div>
+</div>

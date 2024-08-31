@@ -1,0 +1,37 @@
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
+
+<body>
+    <div class="row">
+        <div class="content-image d-flex align-items-center justify-content-center">
+            <img src="../../../../../assets/positions.svg" alt="positions" class="img-fluid">
+        </div>
+        <div class="content-title text-center">
+            <h4 class="title">¡Top 10 de Unidev!</h4>
+            <p>Este es el top de usuario en Unidev en el último mes</p>
+        </div>
+    </div>
+
+    <div class="row mt-3 container-table">
+        <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative;">
+            <table class="table mb-4">
+                <tbody>
+                    @for(user of arrayTopTenUsers; track $index){
+                        <tr>
+                            <th style="width: 20px;" class="text-num">{{$index+1}}</th>
+                            <td style="width: 20px;">
+                                <div class="profile-image">
+                                    <img [src]="user.url_avatar">
+                                </div>
+                            </td>
+                            <td class="text name">{{user.first_name + user.last_name}}</td>
+                            <td style="text-align: right;" class="text">{{user.points}} puntos&nbsp;&nbsp;</td>
+                            <!--<fa-icon [icon]="iconViewInfoProfile" class="iconvIewProfileUser fs-5" data-bs-toggle="mensaje" title="Ver perfil"></fa-icon>-->
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>

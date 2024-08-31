@@ -1,0 +1,64 @@
+body{
+    padding: 0 15px;
+    border-radius: 10px;
+}
+fa-icon{
+    color: var(--primary-color);
+}
+
+#img-profile {
+    border: 1px solid #dadada;
+}
+
+.card {
+    border-radius: 10px !important;
+    border: 1px solid #eee !important;
+}
+
+.btn-primary {
+    border-radius: 50px;
+    background-color: var(--primary-color) !important;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    border-radius: 50px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-danger {
+    border-radius: 50px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.info {
+    font-weight: 500;
+}
+
+.awards-container {
+    text-align: center;
+}
+
+.col-4 {
+    text-align: center;
+}
+
+.category {
+    font-weight: 500;
+}
+
+input[readonly] {
+    background-color: #f0f0f0 !important;
+    color: #6b6b6b;
+    border-color: #dbdbdb;
+    cursor: not-allowed;
+}
+
+/*-------------Responsive Web Design------------*/
+@media screen and (max-width: 768px) {
+    .circle {
+        margin-bottom: 16px;
+    }
+}

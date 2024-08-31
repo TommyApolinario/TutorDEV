@@ -1,0 +1,95 @@
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
+
+<body>
+    <div class="row justify-content-center">
+        <div class="col-12 container-info">
+
+            <div class="div mt-3 mx-1">
+                <h4 id="titulo"><fa-icon [icon]="iconUsers" class="icon-title"></fa-icon> Usuarios</h4>
+            </div>
+            <br />
+
+            <div class="row">
+                <!--Buscar módulo por nombre (Título)-->
+                <div class="col-12 col-md-4 col-lg-4 mb-3">
+                    <form>
+                        <input class="form-control me-1" type="text" placeholder="Buscar por apellidos..." name="buscarMovimientos"
+                            [(ngModel)]="usersToSearch">
+                    </form>
+                </div>
+                <!--Importar los datos de la tabla a Excel-->
+                <div class="col-12 col-md-5 col-lg-5 export-buttons mb-3">
+                    <button (click)="downloadXLSX()" type="button" class="btn save-xlsx" data-bs-toggle="mensaje"
+                        title="Exportar a XLSX">
+                        <fa-icon [icon]="iconXlsx"></fa-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!--Tabla con el listado de módulos-->
+            <div class="card">
+                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true"
+                    style="position: relative;">
+                    <table class="table table-striped mb-0" id="htmlExcelTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">N°</th>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Nombres</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Tipo de usuario</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(arrayUsers.length > 0) {
+                                @for(user of arrayUsers | searchRegisters:usersToSearch:searchBy; track $index){
+                                    <tr>
+                                        <th scope="row">{{$index+1}}</th>
+                                        <td style="width: 20px;">
+                                            <div class="profile-image">
+                                                <img [src]="user.url_avatar">
+                                            </div>
+                                        </td>
+                                        <td>{{user.first_name + " " + user.last_name}}</td>
+                                        <td>{{user.email}}</td>
+                                        <td>{{user.type_user == 'student' ? "Estudiante": user.type_user == 'teacher' ? "Profesor" : "Admin"}}</td>
+                                        <td>
+                                            <div class="text-center"
+                                                [style.background-color]="user.status == 'actived' ? '#198754' : '#ccc'"
+                                                [style.border-radius]="user.status == 'actived'  ? '5px' : '5px'"
+                                                [style.padding]="user.status == 'actived' ? '3px' : '3px'"
+                                                [style.color]="user.status == 'actived' ? 'white' : 'black'">
+                                                {{user.status == 'actived' ? "Aprobado" : "Pendiente"}}
+                                            </div>
+                                        </td>
+                                        <td class="actions">
+                                            <fa-icon data-bs-toggle="mensaje" title="Ver detalles" id="iconViewDetails" (click)="openModalViewInfoUser(viewUserDetail, user)"
+                                                [icon]="iconViewDetails"></fa-icon>
+                                            <fa-icon data-bs-toggle="mensaje" [title]="user.status == 'actived'?'Desactivar usuario':'Aprobar usuario'" id="iconActivateDesactivateUser"
+                                                (click)="user.status != 'actived'?approveUser(user.id):desactivateUser(user.id)"
+                                                [icon]="user.status == 'actived'?iconActivate:iconDesactivate"></fa-icon>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            @else{
+                                <tr>
+                                    <td colspan="7" class="no-results">Sin resultados...</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!--Modal para ver información detallada de un usuario-->
+<ng-template #viewUserDetail>
+    <app-view-users-detail></app-view-users-detail>
+ </ng-template>

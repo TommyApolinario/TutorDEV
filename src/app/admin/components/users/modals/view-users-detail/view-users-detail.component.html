@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="modal-header">
+        <h4 class="modal-title"><fa-icon [icon]="iconUser"></fa-icon> Información del usuario</h4>
+    </div>
+    <div class="modal-body">
+        <!--Foto-->
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <div class="info mb-4">
+                    @if(userDetail.url_avatar == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <div class="user-profile">
+                            <img [src]="userDetail.url_avatar">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!--Nombres y apellidos-->
+        <div class="row">
+            <div class="col-12">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Nombres</b></label>
+                    @if(userDetail.first_name + userDetail.last_name == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{userDetail.first_name + userDetail.last_name}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!--Correo y edad-->
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Correo electrónico</b></label>
+                    @if(userDetail.email == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p class="iconsPublicPrivate"> {{userDetail.email}}</p>
+                    }
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Edad</b></label>
+                    @if(userDetail.birth_date == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{userDetail.birth_date}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!--Estado y tipo de usuario-->
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Fecha de creación</b></label>
+                    @if(userDetail.status == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{userDetail.status}}</p>
+                    }
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="info mb-4">
+                    <label><b><fa-icon [icon]="iconArrowRight"></fa-icon> Fecha de actualización</b></label>
+                    @if(userDetail.type_user == null){
+                        <div class="spinner">
+                            <span class="spinner-border spinner-border-sm" style="color: #5952A2;" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+                    @else{
+                        <p>{{userDetail.type_user}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="modal.dismissAll()" type="button" class="btn btn-primary btn">Aceptar</button>
+    </div>
+</div>

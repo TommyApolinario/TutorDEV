@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #4CAF50; /* Cambiado a verde */
+    --secondary-color: #E8F5E9; /* Cambiado a un verde claro */
+    --white: #FFFFFF;
+    --black: #303030;
+    --text-color: #888888;
+}
+
+h3 {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.container {
+    background-color: var(--secondary-color);
+    min-height: 100vh;
+    width: 100%;
+    align-items: center;
+}
+
+.container .box {
+    width: 500px;
+    height: auto;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 60px;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.terms-and-conditions>span {
+    color: var(--text-color);
+    font-size: 12px;
+}
+
+.terms, .politics {
+    cursor: pointer !important;
+}
+
+.terms:hover {
+    color: #4E4E4E;
+}
+
+.politics:hover {
+    color: #4E4E4E;
+}
+
+.input-group-text>fa-icon {
+    color: var(--primary-color);
+}
+
+.input-group-text>fa-icon {
+    padding: 10px !important;
+}
+
+.input-group-text>fa-icon:hover {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .container .box {
+        padding: 25px 30px !important;
+        margin: 20px !important;
+    }
+}
